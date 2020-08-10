@@ -3,6 +3,17 @@ const GoogleStrategy = require('passport-google-oauth20');
 const { google } = require('../.config.js');
 const { User } = require('../db');
 
+passport.serializeUser((user, done) => {
+  // console.log( user[0].dataValues.id);
+  done(null, user[0].dataValues.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findByPk(id).then((user) => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy({
     callbackURL: '/auth/google/redirect',
@@ -19,7 +30,8 @@ passport.use(
         email: email._json.email,
       },
     }).then((user) => {
-      console.log(`new user ${user}`);
+      // console.log(user);
+      done(null, user);
     }).catch((err) => {
       console.log(err);
     });
