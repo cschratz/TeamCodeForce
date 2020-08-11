@@ -7,6 +7,7 @@ import LogIn from './Login';
 import Logout from './Logout';
 import Dashboard from './Dashboard';
 import Home from './Home';
+import Profile from './Profile';
 import NotFound from './NotFound';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <li><Link to="/logout">logout</Link></li>
             <li><Link to="/dashboard">dashboard</Link></li>
             <li><Link to="/login">login</Link></li>
+            <li><Link to="/profile">profile</Link></li>
           </ul>
         </nav>
         <Switch>
@@ -26,6 +28,7 @@ function App() {
           <Route path="/logout" component={Logout} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/login" component={LogIn} />
+          <Route path="/profile" component={Profile} />
           <Route path="*" component={NotFound} />
         </Switch>
       </main>
