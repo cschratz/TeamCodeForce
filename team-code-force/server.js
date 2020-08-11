@@ -4,14 +4,14 @@ const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const passport = require('passport');
-const passportSetup = require('./passport/GoogleStrategy');
+require('./passport/GoogleStrategy');
 const { authRouter } = require('./routes/auth-routes');
 const { session } = require('./.config.js');
 
 const app = express();
 dotenv.config();
+require('./db/models/Park');
 require('./db/index.js');
-
 const { SERVER_PORT } = process.env || 8080;
 
 app.set('trust proxy', 1);

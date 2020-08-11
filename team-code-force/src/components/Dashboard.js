@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Dashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState({});
+  const [, setUser] = useState({});
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -33,6 +33,11 @@ const Dashboard = () => {
   }, []);
   return (
     <div className="container">
+      {isAuthenticated ? (
+        <div>here is your profile!</div>
+      ) : (
+        <div>you have not logged in</div>
+      )}
       <div id="login-button">Dashboard</div>
     </div>
   );

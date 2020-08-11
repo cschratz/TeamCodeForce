@@ -1,9 +1,18 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
+const UserModel = require('./models/User');
+const ParkModel = require('./models/Park');
+const UserParkHistoryModel = require('./models/UserParkHistory');
+const UserParkWishListModel = require('./models/UserParkWishList');
 
 const sequelize = new Sequelize('parksdb', 'root', '', {
   dialect: 'mysql',
   host: 'localhost',
 });
+
+const User = UserModel(sequelize, Sequelize);
+const Park = ParkModel(sequelize, Sequelize);
+const UserParkHistory = UserParkHistoryModel(sequelize, Sequelize);
+const UserParkWishList = UserParkWishListModel(sequelize, Sequelize);
 
 const connection = async () => {
   try {
@@ -13,81 +22,6 @@ const connection = async () => {
     console.error('Unable to connect to the database:', error);
   }
 };
-
-const User = sequelize.define('User', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  googleId: {
-    type: DataTypes.STRING,
-  },
-  email: {
-    type: DataTypes.STRING,
-  },
-}, {
-  freezeTableName: true,
-  timestamps: false,
-});
-
-const Park = sequelize.define('Park', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-}, {
-  freezeTableName: true,
-  timestamps: false,
-});
-
-const UserParkHistory = sequelize.define('UserParkHistory', {
-  id_user: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: User,
-      key: 'id',
-    },
-  },
-  id_park: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Park,
-      key: 'id',
-    },
-  },
-  comment: {
-    type: DataTypes.STRING,
-  },
-  rating: {
-    type: DataTypes.INTEGER,
-  },
-  favorite: {
-    type: DataTypes.BOOLEAN,
-  },
-}, {
-  freezeTableName: true,
-  timestamps: false,
-});
-
-const UserParkWishList = sequelize.define('UserParkWishList', {
-  id_user: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: User,
-      key: 'id',
-    },
-  },
-  id_park: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Park,
-      key: 'id',
-    },
-  },
-}, {
-  freezeTableName: true,
-  timestamps: false,
-});
 
 const syncModels = async () => {
   try {
