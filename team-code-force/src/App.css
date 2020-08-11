@@ -8,3 +8,15 @@
   height: 350px
 }
 
+.npmarker {
+  height: 30px;
+  height: 35px;
+}
+
+.marker {
+  text-align: center;
+  font-size: 15px;
+  color: black;
+  font-weight: bold;
+}
+

@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
     "startclient"
-  ]
+  ],
+  "eslint.alwaysShowStatus": true
 }

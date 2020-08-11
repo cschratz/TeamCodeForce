@@ -1,19 +1,35 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
-const RouteForm = () => (
-  <div style={{ 'margin-bottom': '20px' }}>
-    <form>
+const RouteForm = (props) => {
+
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
+  const [start, setStart] = React.useState('');
+  const handleStart = event => {
+    setStart(event.target.value);
+  }
+
+  return (
+  <div style={{ 'marginBottom': '20px' }}>
+    <div>
       <label>
-        Starting Point
-        <input type="text" />
+        What States Are You Visiting?
+        <input type="text" placeholder="State Name" value={searchTerm} onChange={handleChange}/>
       </label>
-      <label>
-        End Point
-        <input type="text" />
+      <button onClick={() => props.getpark(searchTerm)}>Add To Trip!</button>
+    </div>
+    <div>
+    <label>
+        Where Are You Starting From?
+        <input type="text" placeholder="Starting Point" value={start} onChange={handleStart}/>
       </label>
-    </form>
+      <button onClick={() => console.log('I was Clicked')}>Get Route!</button>
+    </div>
   </div>
-);
+  );
+}
+
 
 export default RouteForm;
