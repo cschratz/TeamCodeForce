@@ -62,4 +62,3 @@ const Map = (props) => {
 
 export default Map;
 
-// AIzaSyBRJaHFvgEkrduLnV6MNmvjdA_1behDizI
