@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cookieSession = require('cookie-session');
+const cors = require('cors');
 const passport = require('passport');
 const passportSetup = require('./passport/GoogleStrategy');
 const { authRouter } = require('./routes/auth-routes');
@@ -13,6 +14,11 @@ require('./db/index.js');
 const { SERVER_PORT } = process.env || 8080;
 
 app.set('trust proxy', 1);
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: 'GET, HEAD, PUT, PATCH, DELETE',
+  credentials: true,
+}));
 // set up cookie
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
