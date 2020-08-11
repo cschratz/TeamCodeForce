@@ -1,5 +1,6 @@
 const authRouter = require('express').Router();
 const passport = require('passport');
+const { Router } = require('express');
 
 authRouter.get('/login', (req, res) => {
   res.send('login route');
@@ -7,20 +8,30 @@ authRouter.get('/login', (req, res) => {
 
 authRouter.get('/login/success', (req, res) => {
   if (req.user) {
-    res.json({
+    return res.json({
       success: true,
       message: 'user is authenticated',
       user: req.user,
       cookies: req.cookies,
     });
   }
+  console.log('else statement in login/success');
+});
+
+authRouter.get('/login/failed', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'user failed to authenticate',
+  });
 });
 
 authRouter.get('/logout', (req, res) => {
   console.log('logging out');
+  console.log(req.user, 'before logout');
   req.logout();
   // res.redirect('/home');
-  res.send('logged out');
+  console.log(req.user, 'after logout');
+  res.redirect('http://localhost:3000/');
 });
 
 // auth route for google
@@ -30,9 +41,12 @@ authRouter.get('/google', passport.authenticate('google', {
 
 // callback route for google to redirect to
 authRouter.get('/google/redirect', passport.authenticate('google', {
-  successRedirect: 'http://localhost:3000/',
+  successRedirect: 'http://localhost:3000/dashboard',
   failureRedirect: 'http://localhost:3000/login',
 }));
+// after they get sent to client homepage, call use effect there to success login route which will checkAuth and assign 
+  // req.user properties
+
 // authRouter.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 //   // res.send(req.user);
 //   res.redirect('http://localhost:3000/');

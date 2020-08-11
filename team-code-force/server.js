@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const passport = require('passport');
 const passportSetup = require('./passport/GoogleStrategy');
@@ -25,12 +26,16 @@ app.use(cookieSession({
   keys: [session.cookieKey],
 }));
 
+app.use(cookieParser());
+
 // initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.json());
 app.use('/auth', authRouter);
+
+app.get('/')
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server is listening on ${SERVER_PORT}`);

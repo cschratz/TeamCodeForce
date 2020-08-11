@@ -5,18 +5,19 @@ import { useHistory } from 'react-router-dom';
 const Logout = () => {
 
   
-    const history = useHistory();
-    const navigateToLogin = () => {
-      history.push('/');
-    }
+    // const history = useHistory();
+    // const navigateToLogin = () => {
+    //   history.push('/');
+    // }
 
   const logout = () => {
-    console.log('clicked');
-    axios.get('auth/logout')
-      .then((response) => {
-        console.log(response);
-        navigateToLogin();
-      });
+    window.open('http://localhost:8080/auth/logout', '_self');
+    // console.log('clicked');
+    // axios.get('auth/logout')
+    //   .then((response) => {
+    //     console.log(response);
+    //     navigateToLogin();
+    //   });
   };
   return (
     <div className="container">
