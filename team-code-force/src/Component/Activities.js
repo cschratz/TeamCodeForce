@@ -88,11 +88,11 @@ function Activities() {
       ) : (
         <form onSubmit={handleSubmit}>
           <h5>Choose your favorite park activities:</h5>
-          {activities.map(activity => {
+          {activities.map(({id, name}) => {
             return (
-              <label for={activity.name}>
-                <input type="checkbox" id={activity.id} name={activity.name} value={activity.name} onChange={handleChange}/>
-                {activity.name}
+              <label>
+                <input type="checkbox" key={id} value={name} onChange={handleChange}/>
+                {name}
                 <br />
               </label>
             )
