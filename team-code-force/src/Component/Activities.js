@@ -8,31 +8,46 @@ function Activities() {
   // Declare new state variables
   const [parkActivities, setParkActivities] = useState([]);
   const [userActivities, setUserActivities] = useState([]);
+  const [relatedParks, setRelatedParks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleSubmit = (event) => {
+    const searchIds = userActivities.join(',');
+    console.log(searchIds);
+    console.log(`https://developer.nps.gov/api/v1/activities/parks?id=${searchIds}&api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0`)
+    axios.get(`https://developer.nps.gov/api/v1/activities/parks?id=${searchIds}&api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0`)
+      .then(res => { 
+        console.log('Submit:', res)
+        // const currentParks = res.data.data;
+        // setParkActivities(currentActivities);
+        // setIsLoading(false);
+      })
+      .catch(error => {
+        console.log(error)
+      })
     alert("Submit received")
   }
 
 
-  // Checkbox change handler
+  // Activities checkbox change handler
   const handleChange = (event) => {
     // Declare variables for current event checkbox
     const checked = event.target.checked;
-    const activity = event.target.value;
+    const activityId = event.target.id;  // Activity IDs can be used to retrieve parks with particular activity
+    const activity = event.target.value;  // Activity name only for single string searches (not comma delimited list like Activity IDs)
 
     // Declare array variable for user selected activities
-    const selected = [...userActivities];
+    const selectedIds = [...userActivities];
 
     // Index of current activity in user selected array
-    const index = selected.indexOf(activity)
+    const index = selectedIds.indexOf(activityId);
 
-    // If checked and activity is not in user selected array, add activity to array
+    // If checked and activity ID is not in user selected array, add activity ID to array
     if (checked && index === -1) {
-      selected.push(activity);
-    } // Else if unchecked and activity is in user selected array, remove activity from array
+      selectedIds.push(activityId);
+    } // Else if unchecked and activity ID is in user selected array, remove activity ID from array
     else if (!checked && index > -1) {
-      selected.splice(index, 1);
+      selectedIds.splice(index, 1);
     }
 
     // // SELECT BOX code:
@@ -42,7 +57,7 @@ function Activities() {
     // const favorites = Array.from(selectedOptions, (item) => item.value);
 
     // Update user activities state
-    setUserActivities(selected);
+    setUserActivities(selectedIds);
   }
 
 
@@ -90,7 +105,7 @@ function Activities() {
           {parkActivities.map(({id, name}) => {
             return (
               <label>
-                <input type="checkbox" key={id} value={name} onChange={handleChange}/>
+                <input type="checkbox" id={id} value={name} onChange={handleChange}/>
                 {name}
                 <br />
               </label>
