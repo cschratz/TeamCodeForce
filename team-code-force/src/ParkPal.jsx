@@ -12,8 +12,6 @@ function App() {
 
   }, [parks])
 
-
-
   const getPark = (userState) => {
     let state = userState.toLowerCase();
     if (state === 'alabama') {
@@ -123,8 +121,8 @@ function App() {
     }
     axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0`)
     .then(res => res.data.data.forEach(park => {
-      if (park.latitude.length && !parks.find(entry => entry.name === park.name)) {
-        setParks((parks) => ([...parks, {lat: parseFloat(park.latitude), lng: parseFloat(park.longitude), name: park.name, description: park.description, url: park.url}]))
+      if (park.latitude.length && !parks.find(entry => entry.name === park.name) && park.designation === 'National Park') {
+        setParks((parks) => ([...parks, {lat: parseFloat(park.latitude), lng: parseFloat(park.longitude), name: `${park.name} ${park.designation}`, description: park.description, url: park.url, searchName: park.name}]))
       } else {
         return;
       }
@@ -142,7 +140,7 @@ function App() {
         Welcome to National Park Pal!
       </h1>
       <RouteForm getpark={getPark}/>
-      <SimpleMap parks={parks}/>
+      <SimpleMap parks={parks} />
       <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" alt="national parks" className="nps" />
     </div>
   );

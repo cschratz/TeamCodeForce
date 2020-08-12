@@ -1,31 +1,32 @@
 import React from 'react';
 
-const RouteForm = (props) => {
+const RouteForm = ({getpark}) => {
 
   const [searchTerm, setSearchTerm] = React.useState('');
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
-  const [start, setStart] = React.useState('');
-  const handleStart = event => {
-    setStart(event.target.value);
+
+  const onKeyUp = event => {
+    if (event.keyCode === 13) {
+      getpark(searchTerm);
+      setSearchTerm('');
+    }
   }
 
   return (
   <div style={{ 'marginBottom': '20px' }}>
     <div>
       <label>
-        What States Are You Visiting?
-        <input type="text" placeholder="State Name" value={searchTerm} onChange={handleChange}/>
+        What States Are You Visiting? 
+        <br />
+        <br />
+        <input type="text" placeholder="State Name" value={searchTerm} onChange={handleChange} onKeyUp={onKeyUp}/>
       </label>
-      <button onClick={() => props.getpark(searchTerm)}>Add To Trip!</button>
-    </div>
-    <div>
-    <label>
-        Where Are You Starting From?
-        <input type="text" placeholder="Starting Point" value={start} onChange={handleStart}/>
-      </label>
-      <button onClick={() => console.log('I was Clicked')}>Get Route!</button>
+      <button onClick={() => {
+        getpark(searchTerm);
+        setSearchTerm('');
+      }}>Add To Trip!</button>
     </div>
   </div>
   );
