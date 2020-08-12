@@ -1,84 +1,83 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import {activitiesData} from '../Data/activitiesData'
 
 // Activities function component
 function Activities() {
+
   // Declare new state variables
-  const [activities, setActivities] = useState(activitiesData.data);
-  const [favoriteActivities, setFavoriteActivities] = useState([]);
+  const [parkActivities, setParkActivities] = useState([]);
+  const [userActivities, setUserActivities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleSubmit = (event) => {
     alert("Submit received")
   }
 
+
+  // Checkbox change handler
   const handleChange = (event) => {
-    // Declare variables for check box
+    // Declare variables for current event checkbox
     const checked = event.target.checked;
     const activity = event.target.value;
 
-    // Declare variable for favorites array
-    const favorites = [...favoriteActivities];
+    // Declare array variable for user selected activities
+    const selected = [...userActivities];
 
-    const index = favorites.indexOf(activity)
+    // Index of current activity in user selected array
+    const index = selected.indexOf(activity)
 
-    // Check if check box is checked or unchecked
-    // and check if value is in favorites array . . . 
-    // If checked and not in favorites, add activity to favorites array
+    // If checked and activity is not in user selected array, add activity to array
     if (checked && index === -1) {
-      favorites.push(activity);
-    } // If unchecked and in favorites, remove activity from favorites array
+      selected.push(activity);
+    } // Else if unchecked and activity is in user selected array, remove activity from array
     else if (!checked && index > -1) {
-      favorites.splice(index, 1);
+      selected.splice(index, 1);
     }
 
+    // // SELECT BOX code:
     // // Declare variable for selected options
     // const selectedOptions = event.target.selectedOptions;
-
     // // Declare variable for favorites array
     // const favorites = Array.from(selectedOptions, (item) => item.value);
 
-
-    // Update favorite activities state
-    setFavoriteActivities(favorites);
+    // Update user activities state
+    setUserActivities(selected);
   }
 
-  // Favorite Activities 'componentDidUpdate'
-  useEffect(() => {
-    // Confirm update of setFavoriteActivities in handleChange
-    console.log(favoriteActivities);
-  }, [favoriteActivities]);
 
-  // Activities 'ComponentDidMount'
-  // useEffect is executed on every component rendering 
+  // Park Activities 'ComponentDidUpdate'
+  // useEffect is executed on every parkActivities update 
+  useEffect(() => {
+    // Confirm update of setParkActivities in useEffect
+    console.log('Park Activities update', parkActivities);
+  }, [parkActivities]);
+
+
+  // User Activities 'ComponentDidUpdate'
+  // useEffect is executed on every userActivities update 
+  useEffect(() => {
+    // Confirm update of setUserActivities in handleChange
+    console.log('Favorites update', userActivities);
+  }, [userActivities]);
+
+
+  // Park Activities 'ComponentDidMount'
+  // useEffect is executed on every component rendering/updating 
   // unless an empty array is passed as second argument 
   useEffect(async () => {
-  //   // axios.get('/activities')
-  //   console.log(process.env.NPS_API_KEY)
-    debugger
-  //   axios({
-  //     "method": "GET",
-  //     "url": "https://developer.nps.gov/api/v1/activities",
-  //     "headers": {
-  //       "content-type": "application/json"
-  //     }, "params": {
-  //       "api_key": "MKgidX2cBdr771714Q0NFhXdD5HMotDBCFyvFbJj"
-  //     }
-  //   })
-  //     // .then(res => res.json())
-  //     .then(response => {
-  //       console.log(response)
-  //       debugger
-  //       setActivities(response.items);
+    setIsLoading(true);
+    axios.get('https://developer.nps.gov/api/v1/activities?api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0')
+      .then(res => { 
+        const currentActivities = res.data.data;
+        setParkActivities(currentActivities);
         setIsLoading(false);
-  //     })
-  //     .catch(error => {
-  //       debugger
-  //       console.log(error)
-  //     })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }, [])
+
 
   // render Activities
   return (
@@ -88,7 +87,7 @@ function Activities() {
       ) : (
         <form onSubmit={handleSubmit}>
           <h5>Choose your favorite park activities:</h5>
-          {activities.map(({id, name}) => {
+          {parkActivities.map(({id, name}) => {
             return (
               <label>
                 <input type="checkbox" key={id} value={name} onChange={handleChange}/>
@@ -97,8 +96,9 @@ function Activities() {
               </label>
             )
           })}
+          {/* SELECT BOX code: */}
           {/* <select multiple={true} size={10} onChange={handleChange}>
-            {activities.map(activity => {
+            {parkActivities.map(activity => {
               return (
                 <option value={activity.name}>{activity.name}</option>
               )
@@ -111,5 +111,6 @@ function Activities() {
     </div>
   )
 }
+
 
 export default Activities
