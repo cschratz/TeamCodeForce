@@ -5,7 +5,7 @@ import {activitiesData} from '../Data/activitiesData'
 
 // Activities function component
 function Activities() {
-  // Declare a new state variables
+  // Declare new state variables
   const [activities, setActivities] = useState(activitiesData.data);
   const [favoriteActivities, setFavoriteActivities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,11 +15,31 @@ function Activities() {
   }
 
   const handleChange = (event) => {
-    // Declare variable for selected options
-    const selectedOptions = event.target.selectedOptions;
+    // Declare variables for check box
+    const checked = event.target.checked;
+    const activity = event.target.value;
 
     // Declare variable for favorites array
-    const favorites = Array.from(selectedOptions, (item) => item.value);
+    const favorites = [...favoriteActivities];
+
+    const index = favorites.indexOf(activity)
+
+    // Check if check box is checked or unchecked
+    // and check if value is in favorites array . . . 
+    // If checked and not in favorites, add activity to favorites array
+    if (checked && index === -1) {
+      favorites.push(activity);
+    } // If unchecked and in favorites, remove activity from favorites array
+    else if (!checked && index > -1) {
+      favorites.splice(index, 1);
+    }
+
+    // // Declare variable for selected options
+    // const selectedOptions = event.target.selectedOptions;
+
+    // // Declare variable for favorites array
+    // const favorites = Array.from(selectedOptions, (item) => item.value);
+
 
     // Update favorite activities state
     setFavoriteActivities(favorites);
@@ -27,8 +47,8 @@ function Activities() {
 
   // Favorite Activities 'componentDidUpdate'
   useEffect(() => {
-    // // Confirm update of setFavoriteActivities in handleChange
-    // console.log(favoriteActivities);
+    // Confirm update of setFavoriteActivities in handleChange
+    console.log(favoriteActivities);
   }, [favoriteActivities]);
 
   // Activities 'ComponentDidMount'
@@ -63,25 +83,31 @@ function Activities() {
   // render Activities
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <h5>Choose your favorite park activities:</h5>
-        {isLoading ? (
-          <p>Loading . . . </p>
-        ) : (
-          <div>
-            <select multiple={true} size={10} onChange={handleChange}>
-              {activities.map(activity => {
-                return (
-                  <option value={activity.name}>{activity.name}</option>
-                )
-              })}
-            </select>
-            <br />
-            <input type="submit" value="Search/Save" />
-          </div>
-        )}
-
-      </form>
+      {isLoading ? (
+        <p>Loading . . . </p>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <h5>Choose your favorite park activities:</h5>
+          {activities.map(activity => {
+            return (
+              <label for={activity.name}>
+                <input type="checkbox" id={activity.id} name={activity.name} value={activity.name} onChange={handleChange}/>
+                {activity.name}
+                <br />
+              </label>
+            )
+          })}
+          {/* <select multiple={true} size={10} onChange={handleChange}>
+            {activities.map(activity => {
+              return (
+                <option value={activity.name}>{activity.name}</option>
+              )
+            })}
+          </select> */}
+          <br />
+          <input type="submit" value="Search/Save" />
+        </form>
+      )}
     </div>
   )
 }
