@@ -15,18 +15,25 @@ function Activities() {
   }
 
   const handleChange = (event) => {
-    const options = event.target.options;
-    const selected = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selected.push(options[i].value);
-      }
-    }
-    console.log(selected);
+    // Declare variable for selected options
+    const selectedOptions = event.target.selectedOptions;
+
+    // Declare variable for favorites array
+    const favorites = Array.from(selectedOptions, (item) => item.value);
+
+    // Update favorite activities state
+    setFavoriteActivities(favorites);
   }
 
+  // Favorite Activities 'componentDidUpdate'
+  useEffect(() => {
+    // // Confirm update of setFavoriteActivities in handleChange
+    // console.log(favoriteActivities);
+  }, [favoriteActivities]);
+
+  // Activities 'ComponentDidMount'
   // useEffect is executed on every component rendering 
-  // unless an empty array is passed as second argument (so acts like ComponentDidMount)
+  // unless an empty array is passed as second argument 
   useEffect(async () => {
   //   // axios.get('/activities')
   //   console.log(process.env.NPS_API_KEY)
@@ -61,16 +68,19 @@ function Activities() {
         {isLoading ? (
           <p>Loading . . . </p>
         ) : (
-          <select multiple={true} size={10} onChange={handleChange}>
-            {activities.map(activity => {
-              return (
-                <option value={activity.name}>{activity.name}</option>
-              )
-            })}
-          </select>
+          <div>
+            <select multiple={true} size={10} onChange={handleChange}>
+              {activities.map(activity => {
+                return (
+                  <option value={activity.name}>{activity.name}</option>
+                )
+              })}
+            </select>
+            <br />
+            <input type="submit" value="Search/Save" />
+          </div>
         )}
-        <br />
-        <input type="submit" value="Search/Save" />
+
       </form>
     </div>
   )
