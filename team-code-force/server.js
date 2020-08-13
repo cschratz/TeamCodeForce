@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const dotenv = require('dotenv');
 const cookieSession = require('cookie-session');
