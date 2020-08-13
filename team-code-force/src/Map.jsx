@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
-import { google } from './.config'
+import { google } from './.config';
 
-const Map = (props) => {
-
+const Map = ({ parks }) => {
   const [myMarkers, setMarkers] = React.useState([]);
   const [mapReference, setMapReference] = useState(null);
   const [mapsReference, setMapsReference] = useState(null);
@@ -12,22 +13,15 @@ const Map = (props) => {
   const [start, setStart] = useState('');
 
   useEffect(() => {
-    setMarkers(props.parks);
+    setMarkers(parks);
     setCenter({ lat: 39.82, lng: -98.57 });
-  }, [props.parks])
+  }, [parks]);
 
-  const handleStart = event => {
+  const handleStart = (event) => {
     setStart(event.target.value);
-  }
+  };
 
-  const onKeyUp = event => {
-    if (event.keyCode === 13) {
-      handleDirections(start);
-      setStart('');
-    }
-  }
-
-  const handleDirections = (start) => {
+  const handleDirections = () => {
     const waypnts = [];
 
     console.log(myMarkers);
@@ -38,8 +32,8 @@ const Map = (props) => {
       }
       waypnts.push({
         location: park.name,
-        stopover: true
-      })
+        stopover: true,
+      });
     });
 
     console.log('WayPoints: ', waypnts, 'Length: ', waypnts.length);
@@ -57,13 +51,20 @@ const Map = (props) => {
         directionsDisplay.setDirections(response);
         //
         const routePolyline = new mapsReference.Polyline({
-          path: response.routes[0].overview_path
+          path: response.routes[0].overview_path,
         });
         routePolyline.setMap(mapReference);
       } else {
-        window.alert('Directions request failed due to ' + status);
-        }
-      });
+        console.error(`Directions request failed due to ${status}`);
+      }
+    });
+  };
+
+  const onKeyUp = (event) => {
+    if (event.keyCode === 13) {
+      handleDirections(start);
+      setStart('');
+    }
   };
 
   return (
@@ -73,12 +74,17 @@ const Map = (props) => {
           Where Are You Starting From?
           <br />
           <br />
-          <input type="text" placeholder="Starting Point" value={start} onChange={handleStart} onKeyUp={onKeyUp}/>
+          <input type="text" placeholder="Starting Point" value={start} onChange={handleStart} onKeyUp={onKeyUp} />
         </label>
-        <button onClick={() => {
-          handleDirections(start);
-          setStart('');
-          }}>Get Route!</button>
+        <button
+          onClick={() => {
+            handleDirections(start);
+            setStart('');
+          }}
+          type="submit"
+        >
+          Get Route!
+        </button>
       </div>
       <br />
       <div style={{ height: '80vh', width: '100%' }}>
@@ -92,15 +98,16 @@ const Map = (props) => {
             setMapsReference(maps);
           }}
         >
-          {myMarkers.map(park => (
+          {myMarkers.map((park) => (
             <Marker
-            key={park.url}
-            lat={park.lat}
-            lng={park.lng}
-            name={park.name}
-            searchName={park.searchName}
-            url={park.url}
-            desc={park.description}
+              key={park.url}
+              lat={park.lat}
+              lng={park.lng}
+              name={park.name}
+              searchName={park.searchName}
+              url={park.url}
+              desc={park.description}
+              imagePark={park.image}
             />
           ))}
         </GoogleMapReact>
@@ -110,4 +117,3 @@ const Map = (props) => {
 };
 
 export default Map;
-

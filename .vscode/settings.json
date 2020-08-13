@@ -2,5 +2,9 @@
   "cSpell.words": [
     "startclient"
   ],
-  "eslint.alwaysShowStatus": true
+  "eslint.alwaysShowStatus": true,
+
+  "eslint.workingDirectories": [
+    "./team-code-force"
+  ]
 }

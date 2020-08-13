@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
 import SimpleMap from './Map';
 import RouteForm from './RouteForm';
-import axios from 'axios';
+import { nps } from './.config';
 
 function App() {
-
   const [parks, setParks] = useState([]);
 
   useEffect(() => {
 
-  }, [parks])
+  }, [parks]);
 
   const getPark = (userState) => {
     let state = userState.toLowerCase();
@@ -119,27 +119,29 @@ function App() {
     } else if (state === 'washington dc') {
       state = 'dc';
     }
-    axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0`)
-    .then(res => res.data.data.forEach(park => {
-      if (park.latitude.length && !parks.find(entry => entry.name === park.name) && park.designation === 'National Park') {
-        setParks((parks) => ([...parks, {lat: parseFloat(park.latitude), lng: parseFloat(park.longitude), name: `${park.name} ${park.designation}`, description: park.description, url: park.url, searchName: park.name}]))
-      } else {
-        return;
-      }
-    }));
-  }
+    axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=${nps.NPS_API_KEY}`)
+      .then((res) => res.data.data.forEach((park) => {
+        if (park.latitude.length && !parks.find((entry) => entry.name === park.name) && park.designation === 'National Park') {
+          // eslint-disable-next-line no-shadow
+          setParks((parks) => ([...parks, {
+            lat: parseFloat(park.latitude), lng: parseFloat(park.longitude), name: `${park.name} ${park.designation}`, description: park.description, url: park.url, searchName: park.name, image: park.images[0].url,
+          }]));
+        }
+      }));
+  };
 
   const seeParks = () => {
-    console.log(parks);
-  }
+    // console.log(parks);
+    // console.log(nps);
+  };
 
   return (
     <div className="App">
-      <button onClick={seeParks}>See Park List</button>
+      <button onClick={seeParks} type="button">See Park List</button>
       <h1>
         Welcome to National Park Pal!
       </h1>
-      <RouteForm getpark={getPark}/>
+      <RouteForm getpark={getPark} />
       <SimpleMap parks={parks} />
       <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" alt="national parks" className="nps" />
     </div>
