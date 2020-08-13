@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Activities.css';
 
 
 // Activities function component
@@ -15,12 +16,10 @@ function Activities() {
   // Updates resulting parks with user selected activities
   const handleClick = (event) => {
     const searchIds = userActivities.join(',');
-    setIsLoading(true);
     axios.get(`https://developer.nps.gov/api/v1/activities/parks?id=${searchIds}&api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0`)
       .then(res => {
         const currentParks = res.data.data;
         setResultingParks(currentParks);
-        setIsLoading(false);
       })
       .catch(error => {
         console.log(error)
@@ -130,11 +129,11 @@ function Activities() {
                       return (
                         <div>
                           <li><a href={url} target="_blank">{fullName}</a></li>
-                          <br />
                         </div>
                       )
                     })}
                   </ul>
+                  <br />
                 </div>
               )
             })}
