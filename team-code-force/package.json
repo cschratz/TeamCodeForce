@@ -24,6 +24,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-slideshow-image": "^3.0.2",
     "sequelize": "^6.3.4",
     "serve": "^11.3.2",
     "typescript": "^3.9.7"

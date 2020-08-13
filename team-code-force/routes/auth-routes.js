@@ -21,7 +21,7 @@ authRouter.get('/login/failed', (req, res) => {
 
 authRouter.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('http://localhost:3000/');
+  res.redirect('http://localhost:3000/login');
 });
 
 // auth route for google
@@ -31,7 +31,7 @@ authRouter.get('/google', passport.authenticate('google', {
 
 // callback route for google to redirect to
 authRouter.get('/google/redirect', passport.authenticate('google', {
-  successRedirect: 'http://localhost:3000/dashboard',
+  successRedirect: 'http://localhost:3000/',
   failureRedirect: 'http://localhost:3000/login',
 }));
 
