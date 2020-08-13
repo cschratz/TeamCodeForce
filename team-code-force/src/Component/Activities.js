@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Activities.css';
 
 
-// Activities function component
 function Activities() {
 
   // Declare new state variables
@@ -12,9 +11,10 @@ function Activities() {
   const [resultingParks, setResultingParks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Park Activities Search button click handler
+
+  // Park Activities Search click handler
   // Updates resulting parks with user selected activities
-  const handleClick = (event) => {
+  const handleSearchClick = (event) => {
     const searchIds = userActivities.join(',');
     axios.get(`https://developer.nps.gov/api/v1/activities/parks?id=${searchIds}&api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0`)
       .then(res => {
@@ -32,56 +32,49 @@ function Activities() {
   const handleChange = (event) => {
     // Declare variables for current event checkbox
     const checked = event.target.checked;
-    const activityId = event.target.id;  // Activity IDs can be used to retrieve parks with particular activity (comma delimited)
+    const activityId = event.target.id;  // Only Activity IDs can be comma delimited when retrieving parks
 
     // Declare array variable for user selected activities
     const selectedIds = [...userActivities];
 
-    // Index of current activity in user selected array
+    // Find index of current activity in selected array
     const index = selectedIds.indexOf(activityId);
 
-    // If checked and activity ID is not in user selected array, add activity ID to array
+    // If checked and activity ID is not in selected array, add activity ID to array
     if (checked && index === -1) {
       selectedIds.push(activityId);
-    } // Else if unchecked and activity ID is in user selected array, remove activity ID from array
+    } // Else if unchecked and activity ID is in selected array, remove activity ID from array
     else if (!checked && index > -1) {
       selectedIds.splice(index, 1);
     }
 
-    // Update user activities state
     setUserActivities(selectedIds);
   }
 
 
-  // Park Activities 'ComponentDidUpdate'
-  // useEffect is executed on every parkActivities update
+  // Execute on every update to parkActivities
   useEffect(() => {
-    // Confirm update of setParkActivities in useEffect
+    // Confirm update of setParkActivities on page load
     console.log('Park Activities update', parkActivities);
   }, [parkActivities]);
 
 
-  // User Activities 'ComponentDidUpdate'
-  // useEffect is executed on every userActivities update
+  // Execute on every update to userActivities
   useEffect(() => {
     // Confirm update of setUserActivities in handleChange
     console.log('Favorites update', userActivities);
   }, [userActivities]);
 
 
-  // Resulting Parks 'ComponentDidUpdate'
-  // useEffect is executed on every resultingParks update
+  // Execute on every update to resultingParks
   useEffect(() => {
     // Confirm update of setResultingActivities in handleClick
     console.log('Search update', resultingParks);
   }, [resultingParks]);
 
 
-  // Park Activities 'ComponentDidMount'
-  // Lists all park activities available 
-  // useEffect is executed on every component rendering/updating
-  // unless an empty array is passed as second argument
-  useEffect(async () => {
+  // Retrieve all activity categories in national parks upon initial rendering of page
+  useEffect(() => {
     setIsLoading(true);
     axios.get('https://developer.nps.gov/api/v1/activities?api_key=gwHKy0xMUoHYHE6MhzXkBbKYuPcejjLlkuMpJdK0')
       .then(res => {
@@ -90,18 +83,18 @@ function Activities() {
         setIsLoading(false);
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
       })
   }, [])
 
 
-  // render Activities
+  // Render Activities component
   return (
-    <div>
+    <div className="activities">
       {isLoading ? (
         <p>Loading . . . </p>
       ) : (
-        <div>
+        <div className="activities-search">
           <form>
             <h5>Choose your favorite park activities:</h5>
             {parkActivities.map(({id, name}) => {
@@ -114,20 +107,20 @@ function Activities() {
               )
             })}
             <br />
-            <button type="button" onClick={handleClick}>Search / Save</button>
+            <button className="button" type="button" onClick={handleSearchClick} onclick="document.body.style.cursor='wait'; return true;">Search</button>
           </form>
           <hr />
           <h5>Parks with your favorite activities:</h5>
           <ul>
             {resultingParks.map(({id, name, parks}) => {
               return (
-                <div>
+                <div className="selected-activity">
                   <li>{name}</li>
                   <br />
                   <ul>
                     {parks.map(({states, fullName, url}) => {
                       return (
-                        <div>
+                        <div className="activity-park">
                           <li><a href={url} target="_blank">{fullName}</a></li>
                         </div>
                       )
@@ -142,7 +135,8 @@ function Activities() {
       )}
     </div>
   )
+
 }
 
 
-export default Activities
+export default Activities;
