@@ -7,11 +7,12 @@ const passport = require('passport');
 require('./passport/GoogleStrategy');
 const { authRouter } = require('./routes/auth-routes');
 const { session } = require('./.config.js');
-
-const app = express();
-dotenv.config();
 require('./db/models/Park');
 require('./db/index.js');
+
+dotenv.config();
+const app = express();
+
 const { SERVER_PORT } = process.env || 8080;
 
 app.set('trust proxy', 1);
@@ -20,6 +21,7 @@ app.use(cors({
   methods: 'GET, HEAD, PUT, PATCH, DELETE',
   credentials: true,
 }));
+
 // set up cookie
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,

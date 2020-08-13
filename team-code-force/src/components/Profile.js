@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 const Profile = () => {
   const profileHit = () => {
@@ -19,7 +18,7 @@ const Profile = () => {
   };
   return (
     <div className="container">
-      <button onClick={profileHit}>Profile</button>
+      <button type="button" onClick={profileHit}>Profile</button>
     </div>
   );
 };

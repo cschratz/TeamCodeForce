@@ -4,7 +4,6 @@ const { google } = require('../.config.js');
 const { User } = require('../db');
 
 passport.serializeUser((user, done) => {
-  // console.log( user[0].dataValues.id);
   done(null, user[0].dataValues.id);
 });
 
@@ -30,13 +29,9 @@ passport.use(
         email: email._json.email,
       },
     }).then((user) => {
-      // console.log(user);
       done(null, user);
     }).catch((err) => {
       console.log(err);
     });
-    // console.log('passport callback func fired');
-    // console.log('this is profile', profile);
-    // console.log('this is email', email);
   }),
 );
