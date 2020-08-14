@@ -19,6 +19,7 @@
 .env.production.local
 .env
 .config.js
+./src/components/.config.js
 
 .env
 .config.js
