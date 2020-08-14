@@ -6,11 +6,10 @@ import {
 import './App.css';
 import SlideShow from './slideshow';
 // import { slideShow } from './slideshow-data';
-import LogIn from './Login';
-import Logout from './Logout';
 import NotFound from './NotFound';
 import Profile from './Profile';
 import ParkPal from './ParkPal';
+import Activities from './Activities';
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -54,7 +53,7 @@ const Home = () => {
   return (
     <div className="App">
       <h1 id="logo">National Park Pal!</h1>
-      <h3>Search parks and activities to optomize your road trip experience!</h3>
+      <h3>Search parks and activities to optimize your road trip experience!</h3>
       <Router>
         <main>
           <nav id="navbar">
@@ -76,12 +75,13 @@ const Home = () => {
               ? (
                 <>
                   <Route path="/profile" component={Profile} />
-                  <Route path="/parksearch" component={ParkPal} />
-                  {/* <Route path="/activity" component={Activities} /> */}
+                  <Route path="/parkpal" component={ParkPal} />
+                  <Route path="/activity" component={Activities} />
                 </>
               ) : <Redirect to="/" />}
             <Route path="*" component={NotFound} />
           </Switch>
+          {/* <SlideShow /> */}
         </main>
       </Router>
     </div>

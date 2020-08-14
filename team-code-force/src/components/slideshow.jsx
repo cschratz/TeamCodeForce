@@ -1,6 +1,6 @@
 import React from 'react';
 import { Zoom } from 'react-slideshow-image';
-import { slideShow } from './slideshow-data';
+import slideShow from './slideshow-data';
 import 'react-slideshow-image/dist/styles.css';
 
 const SlideShow = () => {
