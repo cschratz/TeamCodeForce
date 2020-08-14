@@ -5,11 +5,10 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import SlideShow from './slideshow';
-import { slideShow } from './slideshow-data';
-import LogIn from './Login';
-import Logout from './Logout';
+// import { slideShow } from './slideshow-data';
 import NotFound from './NotFound';
 import Profile from './Profile';
+import ParkPal from './ParkPal';
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,17 +45,14 @@ const Home = () => {
     console.log('logging out');
     window.open('http://localhost:8080/auth/logout', '_self');
   };
-
   const googleSignIn = () => {
     window.open('http://localhost:8080/auth/google', '_self');
   };
 
   return (
     <div className="App">
-      <div id="logo">National Park Pal</div>
-      <p>
-        Search parks and activities to optimize your road trip experience!
-      </p>
+      <h1 id="logo">National Park Pal!</h1>
+      <h3>Search parks and activities to optimize your road trip experience!</h3>
       <Router>
         <main>
           <nav id="navbar">
@@ -78,7 +74,7 @@ const Home = () => {
               ? (
                 <>
                   <Route path="/profile" component={Profile} />
-                  {/* <Route path="/parksearch" component={ParkPal} /> */}
+                  <Route path="/parkpal" component={ParkPal} />
                   {/* <Route path="/activity" component={Activities} /> */}
                 </>
               ) : <Redirect to="/" />}

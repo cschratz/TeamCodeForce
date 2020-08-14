@@ -1,4 +1,4 @@
-export const slideShow = [
+const slideShow = [
   {
     name: 'Acadia National Park',
     image: 'https://www.nps.gov/common/uploads/structured_data/3C7B45AE-1DD8-B71B-0B7EE131C7DFC2F5.jpg',
@@ -26,4 +26,4 @@ export const slideShow = [
   },
 ];
 
-// module.exports = slideShow;
+export default slideShow;

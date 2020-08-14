@@ -1,7 +1,21 @@
 /* @import "compass/css3"; */
+.nps {
+  margin-top: 25px;
+  width: 300px;
+  height: 350px
+}
 
+.npmarker {
+  height: 30px;
+  height: 35px;
+}
 
-
+.marker {
+  text-align: center;
+  font-size: 15px;
+  color: black;
+  font-weight: bold;
+}
 
 .App {
   text-align: center;
@@ -28,7 +42,7 @@
   background-color: #f1f1f1;
   padding: 20px; /* Large padding which will shrink on scroll (using JS) */
   transition: 0.4s; /* Adds a transition effect when the padding is decreased */
-  position: fixed; /* Sticky/fixed navbar */
+  position: static; /* Sticky/fixed navbar */
   width: 100%;
   top: 0; /* At the top */
   z-index: 99;
@@ -83,4 +97,5 @@
   #navbar-right {
     float: none;
   }
+
 }
