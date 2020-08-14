@@ -5,7 +5,7 @@ import NPSLogo from './images/NPS.png';
 import InfoWindow from './InfoWindow';
 
 const Marker = ({
-  url, name, desc, imagePark,
+  url, name, desc, imagePark, user,
 }) => {
   const [isShown, setIsShown] = useState(false);
 
@@ -29,7 +29,7 @@ const Marker = ({
       }}
     >
       <img className="npmarker" src={NPSLogo} alt="NPS Logo" />
-      {isShown && <InfoWindow name={name} desc={desc} url={url} image={imagePark} />}
+      {isShown && <InfoWindow name={name} desc={desc} url={url} image={imagePark} user={user}/>}
       {isHovered && (<div className="marker">{name}</div>)}
     </div>
   );

@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
     },
+    image: {
+      type: DataTypes.STRING,
+    }
   }, {
     freezeTableName: true,
     timestamps: false,

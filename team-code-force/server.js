@@ -7,6 +7,7 @@ const cors = require('cors');
 const passport = require('passport');
 require('./passport/GoogleStrategy');
 const { authRouter } = require('./routes/auth-routes');
+const { parkRouter } = require('./routes/park-routes');
 const { session } = require('./.config.js');
 require('./db/models/Park');
 require('./db/index.js');
@@ -37,6 +38,8 @@ app.use(passport.session());
 
 app.use(express.json());
 app.use('/auth', authRouter);
+app.use('/park', parkRouter);
+
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server is listening on ${SERVER_PORT}`);

@@ -1,24 +1,10 @@
 import React from 'react';
 
-const Profile = () => {
-  const profileHit = () => {
-    fetch('http://localhost:8080/auth/profile', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true,
-      },
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-      });
-  };
+const Profile = ({ user }) => {
   return (
     <div className="container">
-      <button type="button" onClick={profileHit}>Profile</button>
+      This Is Your Profile {user.name}!
+      <img src={user.image} />
     </div>
   );
 };

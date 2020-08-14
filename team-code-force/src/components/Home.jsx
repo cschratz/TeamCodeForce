@@ -13,7 +13,7 @@ import Activities from './Activities';
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [, setUser] = useState({});
+  const [user, setUser] = useState({});
   // const [slides] = useState(slideShow);
   // const [currentImage] = useState(slideShow[0]);
 
@@ -70,12 +70,12 @@ const Home = () => {
             <Route exact path="/" component={SlideShow} />
             <Route path="/login" component={SlideShow} />
             <Route path="/logout" component={SlideShow} />
-            {/* <Route path="/dashboard" render={(props) => <Dashboard {...props} isAuthenticated={isAuthenticated} />} /> */}
+            {/* <Route path="/dashboard"  isAuthenticated={isAuthenticated} />} /> */}
             { isAuthenticated
               ? (
                 <>
-                  <Route path="/profile" component={Profile} />
-                  <Route path="/parkpal" component={ParkPal} />
+                  <Route path="/profile" render={(props) => <Profile {...props} user={user} />} />
+                  <Route path="/parkpal" render={(props) => <ParkPal {...props} user={user} />}/>
                   <Route path="/activity" component={Activities} />
                 </>
               ) : <Redirect to="/" />}
