@@ -20,6 +20,7 @@ passport.use(
     clientSecret: google.clientSecret,
   },
   (accessToken, refreshToken, profile, email, done) => {
+    console.log('Email: ', email);
     User.findOrCreate({
       where: { googleId: email.id },
       defaults: {
@@ -27,6 +28,7 @@ passport.use(
         googleId: email.id,
         // eslint-disable-next-line no-underscore-dangle
         email: email._json.email,
+        image: email._json.picture,
       },
     }).then((user) => {
       done(null, user);

@@ -66,21 +66,21 @@ function Activities() {
   // Execute on every update to parkActivities
   useEffect(() => {
     // Confirm update of setParkActivities on page load
-    console.log('Park Activities update', parkActivities);
+    // console.log('Park Activities update', parkActivities);
   }, [parkActivities]);
 
 
   // Execute on every update to userActivities
   useEffect(() => {
     // Confirm update of setUserActivities in handleChange
-    console.log('Favorites update', userActivities);
+    // console.log('Favorites update', userActivities);
   }, [userActivities]);
 
 
   // Execute on every update to resultingParks
   useEffect(() => {
     // Confirm update of setResultingActivities in handleClick
-    console.log('Search update', resultingParks);
+    // console.log('Search update', resultingParks);
   }, [resultingParks]);
 
 
@@ -108,38 +108,30 @@ function Activities() {
         <div className="activities-search">
           <form>
             <h5>Choose your favorite park activities:</h5>
-            {/* {parkActivities.map(({id, name}) => {
-              return (
-                <label>
-                  <input type="checkbox" id={id} value={name} onChange={handleChange}/>
-                  {name}
-                  <br />
-                </label>
-              )
-            })} */}
             <select multiple={true} size={10} onChange={handleChange}>
               {parkActivities.map(({id, name}) => {
                 return (
-                  <option id={id} value={name}>{name}</option>
+                  <option key={id} id={id} value={name}>{name}</option>
                 )
               })}
             </select>
             <br />
-            <button className="button" type="button" onClick={handleSearchClick} onclick="document.body.style.cursor='wait'; return true;">Search</button>
+            <br />
+            <button className="button" type="button" onClick={handleSearchClick}>Search</button>
           </form>
           <hr />
           <h5>Parks with your favorite activities:</h5>
           <ul>
             {resultingParks.map(({id, name, parks}) => {
               return (
-                <div className="selected-activity">
+                <div className="selected-activity" key={id}>
                   <li>{name}</li>
                   <br />
                   <ul>
                     {parks.map(({states, fullName, url}) => {
                       return (
-                        <div className="activity-park">
-                          <li><a href={url} target="_blank">{fullName}</a></li>
+                        <div className="activity-park" key={url}>
+                          <li><a href={url} target="_blank" rel="noopener noreferrer">{fullName} </a></li>
                         </div>
                       )
                     })}

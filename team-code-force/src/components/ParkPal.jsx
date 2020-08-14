@@ -5,7 +5,7 @@ import SimpleMap from './Map';
 import RouteForm from './RouteForm';
 import { nps } from './.config';
 
-function ParkPal() {
+function ParkPal({ user }) {
   const [parks, setParks] = useState([]);
 
   useEffect(() => {
@@ -133,7 +133,7 @@ function ParkPal() {
   return (
     <div className="ParkPal">
       <RouteForm getpark={getPark} />
-      <SimpleMap parks={parks} />
+      <SimpleMap parks={parks} user={user}/>
       <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" alt="national parks" className="nps" />
     </div>
   );

@@ -6,7 +6,7 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import { google } from './.config';
 
-const Map = ({ parks }) => {
+const Map = ({ parks, user }) => {
   const [myMarkers, setMarkers] = React.useState([]);
   const [mapReference, setMapReference] = useState(null);
   const [mapsReference, setMapsReference] = useState(null);
@@ -106,6 +106,7 @@ const Map = ({ parks }) => {
               url={park.url}
               desc={park.description}
               imagePark={park.image}
+              user={user}
             />
           ))}
         </GoogleMapReact>

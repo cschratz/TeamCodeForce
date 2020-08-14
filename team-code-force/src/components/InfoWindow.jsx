@@ -1,7 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 
 const InfoWindow = ({
-  url, name, desc, image,
+  url, name, desc, image, user,
 }) => {
   const infoWindowStyle = {
     position: 'relative',
@@ -21,6 +22,28 @@ const InfoWindow = ({
     objectFit: 'cover',
   };
 
+  const saveWishlist = (data) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, userID: data.id })
+    };
+    fetch('http://localhost:8080/park/wishlist', requestOptions)
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }
+
+  const saveParkHistory = (data) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, userID: data.id })
+    };
+    fetch('http://localhost:8080/park/history', requestOptions)
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }
+
   return (
     <div style={infoWindowStyle}>
       <div style={{ fontSize: 16 }}>
@@ -39,6 +62,8 @@ const InfoWindow = ({
         <br />
         <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
       </div>
+      <button style={{marginRight: '20px'}} onClick={() => saveWishlist(user)}>Add To WishList</button>
+      <button onClick={() => saveParkHistory(user)}>Seen It!</button>
     </div>
   );
 };
