@@ -27,38 +27,39 @@ function Activities() {
   }
 
 
-  // Activities checkbox change handler
+  // Activities change handler
   // Updates user selected activities
   const handleChange = (event) => {
-    // Declare variables for current event checkbox
-    const checked = event.target.checked;
-    const activityId = event.target.id;  // Only Activity IDs can be comma delimited when retrieving parks
+    // // Checkboxes
+    // // Declare variables for current event checkbox
+    // const checked = event.target.checked;
+    // const activityId = event.target.id;  // Only Activity IDs can be comma delimited when retrieving parks
 
-    // Declare array variable for user selected activities
-    const selectedIds = [...userActivities];
+    // // Declare array variable for user selected activities
+    // const selectedIds = [...userActivities];
 
-    // Find index of current activity in selected array
-    const index = selectedIds.indexOf(activityId);
+    // // Find index of current activity in selected array
+    // const index = selectedIds.indexOf(activityId);
 
-    // If checked and activity ID is not in selected array, add activity ID to array
-    if (checked && index === -1) {
-      selectedIds.push(activityId);
-    } // Else if unchecked and activity ID is in selected array, remove activity ID from array
-    else if (!checked && index > -1) {
-      selectedIds.splice(index, 1);
-    }
+    // // If checked and activity ID is not in selected array, add activity ID to array
+    // if (checked && index === -1) {
+    //   selectedIds.push(activityId);
+    // } // Else if unchecked and activity ID is in selected array, remove activity ID from array
+    // else if (!checked && index > -1) {
+    //   selectedIds.splice(index, 1);
+    // }
 
-    setUserActivities(selectedIds);
-
-    // // Multiple Select Box
-    // // Declare variable for selected options
-    // const selectedOptions = event.target.selectedOptions;
-
-    // // Declare variable for favorites array
-    // const selectedIds = Array.from(selectedOptions, (item) => item.id);
-
-    // // Update favorite activities state
     // setUserActivities(selectedIds);
+
+    // Multiple Select Box
+    // Declare variable for selected options
+    const selectedOptions = event.target.selectedOptions;
+
+    // Declare variable for favorites array
+    const selectedIds = Array.from(selectedOptions, (item) => item.id);
+
+    // Update favorite activities state
+    setUserActivities(selectedIds);
   }
 
 
@@ -107,7 +108,7 @@ function Activities() {
         <div className="activities-search">
           <form>
             <h5>Choose your favorite park activities:</h5>
-            {parkActivities.map(({id, name}) => {
+            {/* {parkActivities.map(({id, name}) => {
               return (
                 <label>
                   <input type="checkbox" id={id} value={name} onChange={handleChange}/>
@@ -115,14 +116,14 @@ function Activities() {
                   <br />
                 </label>
               )
-            })}
-            {/* <select multiple={true} size={10} onChange={handleChange}>
+            })} */}
+            <select multiple={true} size={10} onChange={handleChange}>
               {parkActivities.map(({id, name}) => {
                 return (
                   <option id={id} value={name}>{name}</option>
                 )
               })}
-            </select> */}
+            </select>
             <br />
             <button className="button" type="button" onClick={handleSearchClick} onclick="document.body.style.cursor='wait'; return true;">Search</button>
           </form>
