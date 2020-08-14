@@ -49,6 +49,16 @@ function Activities() {
     }
 
     setUserActivities(selectedIds);
+
+    // // Multiple Select Box
+    // // Declare variable for selected options
+    // const selectedOptions = event.target.selectedOptions;
+
+    // // Declare variable for favorites array
+    // const selectedIds = Array.from(selectedOptions, (item) => item.id);
+
+    // // Update favorite activities state
+    // setUserActivities(selectedIds);
   }
 
 
@@ -106,6 +116,13 @@ function Activities() {
                 </label>
               )
             })}
+            {/* <select multiple={true} size={10} onChange={handleChange}>
+              {parkActivities.map(({id, name}) => {
+                return (
+                  <option id={id} value={name}>{name}</option>
+                )
+              })}
+            </select> */}
             <br />
             <button className="button" type="button" onClick={handleSearchClick} onclick="document.body.style.cursor='wait'; return true;">Search</button>
           </form>
