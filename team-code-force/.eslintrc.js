@@ -5,8 +5,10 @@ module.exports = {
     node: true,
   },
   extends: [
+    'react-app',
     'plugin:react/recommended',
     'airbnb',
+    // "plugin:jsx-a11y/recommended"
   ],
   globals: {
     Atomics: 'readonly',
@@ -20,8 +22,9 @@ module.exports = {
   },
   plugins: [
     'react',
+    'jsx-a11y',
   ],
   rules: {
-    "react/prop-types": [0],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   },
 };
