@@ -66,6 +66,7 @@ const Map = ({ parks }) => {
 
   return (
     <div>
+      <br />
       <div>
         <label>
           Where Are You Starting From?

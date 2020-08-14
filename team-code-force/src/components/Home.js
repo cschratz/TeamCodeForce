@@ -9,7 +9,7 @@ import SlideShow from './slideshow';
 import LogIn from './Login';
 import Logout from './Logout';
 import NotFound from './NotFound';
-// import Profile from './Profile';
+import Profile from './Profile';
 import ParkPal from './ParkPal';
 
 const Home = () => {
@@ -64,7 +64,7 @@ const Home = () => {
             <Route path="/logout" component={Logout} />
             {/* <Route path="/dashboard" render={(props) => <Dashboard {...props} isAuthenticated={isAuthenticated} />} /> */}
             <Route path="/login" component={LogIn} />
-            {/* <Route path="/profile" component={Profile} /> */}
+            <Route path="/profile" component={Profile} />
             <Route path="/parkpal" component={ParkPal} />
             {/* <Route path="/activity" component={Activities} /> */}
             <Route path="*" component={NotFound} />
