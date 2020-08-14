@@ -4,7 +4,7 @@ const ParkModel = require('./models/Park');
 const UserParkHistoryModel = require('./models/UserParkHistory');
 const UserParkWishListModel = require('./models/UserParkWishList');
 
-const sequelize = new Sequelize('parksdb', 'root', '', {
+const sequelize = new Sequelize('parksdb', 'root', '0924', {
   dialect: 'mysql',
   host: 'localhost',
 });
