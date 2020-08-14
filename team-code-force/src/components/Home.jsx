@@ -9,6 +9,7 @@ import SlideShow from './slideshow';
 import NotFound from './NotFound';
 import Profile from './Profile';
 import ParkPal from './ParkPal';
+import Activities from './Activities';
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -75,7 +76,7 @@ const Home = () => {
                 <>
                   <Route path="/profile" component={Profile} />
                   <Route path="/parkpal" component={ParkPal} />
-                  {/* <Route path="/activity" component={Activities} /> */}
+                  <Route path="/activity" component={Activities} />
                 </>
               ) : <Redirect to="/" />}
             <Route path="*" component={NotFound} />
