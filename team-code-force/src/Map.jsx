@@ -24,8 +24,6 @@ const Map = ({ parks }) => {
   const handleDirections = () => {
     const waypnts = [];
 
-    console.log(myMarkers);
-
     myMarkers.forEach((park, index) => {
       if (index === myMarkers.length - 1) {
         return;
@@ -35,8 +33,6 @@ const Map = ({ parks }) => {
         stopover: true,
       });
     });
-
-    console.log('WayPoints: ', waypnts, 'Length: ', waypnts.length);
 
     const directionsService = new mapsReference.DirectionsService();
     const directionsDisplay = new mapsReference.DirectionsRenderer();

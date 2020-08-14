@@ -130,14 +130,8 @@ function App() {
       }));
   };
 
-  const seeParks = () => {
-    // console.log(parks);
-    // console.log(nps);
-  };
-
   return (
     <div className="App">
-      <button onClick={seeParks} type="button">See Park List</button>
       <h1>
         Welcome to National Park Pal!
       </h1>
