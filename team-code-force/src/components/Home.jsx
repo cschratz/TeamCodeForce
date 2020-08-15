@@ -48,10 +48,10 @@ const Home = () => {
 
   const logout = () => {
     console.log('logging out');
-    window.open(`https://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/logout`, '_self');
+    window.open(`https://${process.env.REACT_APP_SERVER_IP}/auth/logout`, '_self');
   };
   const googleSignIn = () => {
-    window.open(`https://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/google`, '_self');
+    window.open(`https://${process.env.REACT_APP_SERVER_IP}/auth/google`, '_self');
   };
 
   return (

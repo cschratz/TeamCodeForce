@@ -2,7 +2,7 @@ const authRouter = require('express').Router();
 const passport = require('passport');
 require('dotenv').config();
 
-const { VM_IP } = process.env || 'localhost';
+const { CLIENT } = process.env || 'localhost';
 
 authRouter.get('/login/success', (req, res) => {
   if (req.user) {
@@ -26,7 +26,7 @@ authRouter.get('/login/failed', (req, res) => {
 
 authRouter.get('/logout', (req, res) => {
   req.logout();
-  res.redirect(`https://${VM_IP}:3000/login`);
+  res.redirect(`https://${CLIENT}/login`);
 });
 
 // auth route for google
@@ -36,8 +36,8 @@ authRouter.get('/google', passport.authenticate('google', {
 
 // callback route for google to redirect to
 authRouter.get('/google/redirect', passport.authenticate('google', {
-  successRedirect: `https://${VM_IP}:3000/`,
-  failureRedirect: `https://${VM_IP}:3000/login`,
+  successRedirect: `https://${CLIENT}/`,
+  failureRedirect: `https://${CLIENT}/login`,
 }));
 
 // auth check middleware

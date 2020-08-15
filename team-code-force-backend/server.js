@@ -14,13 +14,13 @@ require('./db/index.js');
 dotenv.config();
 const app = express();
 
-const { SERVER_PORT } = process.env || 8080;
+const { SERVER_IP } = process.env || 8080;
 
-const { VM_IP } = process.env || 'localhost';
+const { CLIENT } = process.env || 'localhost';
 
 app.set('trust proxy', 1);
 app.use(cors({
-  origin: `https://${VM_IP}:3000`,
+  origin: `https://${CLIENT}`,
   methods: 'GET, HEAD, PUT, PATCH, DELETE',
   credentials: true,
 }));
@@ -41,6 +41,6 @@ app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/park', parkRouter);
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Server is listening on ${SERVER_PORT}`);
+app.listen(SERVER_IP, () => {
+  console.log(`Server is listening on ${SERVER_IP}`);
 });
