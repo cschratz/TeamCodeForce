@@ -26,16 +26,31 @@ parkRouter.post('/wishlist', (req, res) => {
   });
 });
 
-parkRouter.post('./wishlist/get', (req, res) => {
-  User.hasMany(Park, { foreignKey: 'id_park' });
+// parkRouter.post('./wishlist', (req, res) => {
+//   UserParkWishList.findAll({
+//     where: {
+//       { id_user: userID }
+//     }
+//     include: [
+//       {
+//         model: Park,
+//         where: {
+//           id_park: 
+//         }
+//       }
+//     ]
+//   })
+// });
+// parkRouter.post('./wishlist/get', (req, res) => {
+//   User.hasMany(Park, { foreignKey: 'id_park' });
 
-  const { userID } = req.body;
-  const parkResult = [];
-  UserParkWishList.findAll({
-    where: { id_user: userID },
+//   const { userID } = req.body;
+//   const parkResult = [];
+//   UserParkWishList.findAll({
+//     where: { id_user: userID },
  
-  })
-});
+//   })
+// });
 // parkRouter.post('/wishlist/get', (req, res) => {
 //   const { userID } = req.body;
 //   const parkResult = [];
