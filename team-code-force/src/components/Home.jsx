@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import {
@@ -10,15 +11,17 @@ import NotFound from './NotFound';
 import Profile from './Profile';
 import ParkPal from './ParkPal';
 import Activities from './Activities';
+import NotSignedIn from './NotSignedIn';
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
   // const [slides] = useState(slideShow);
   // const [currentImage] = useState(slideShow[0]);
+  const { REACT_APP_SERVER_PORT } = process.env || 8080;
 
   useEffect(() => {
-    fetch('http://localhost:8080/auth/login/success', {
+    fetch(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/auth/login/success`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -44,10 +47,10 @@ const Home = () => {
 
   const logout = () => {
     console.log('logging out');
-    window.open('http://localhost:8080/auth/logout', '_self');
+    window.open(`http://localhost:${REACT_APP_SERVER_PORT}/auth/logout`, '_self');
   };
   const googleSignIn = () => {
-    window.open('http://localhost:8080/auth/google', '_self');
+    window.open(`http://localhost:${REACT_APP_SERVER_PORT}/auth/google`, '_self');
   };
 
   return (
@@ -70,15 +73,16 @@ const Home = () => {
             <Route exact path="/" component={SlideShow} />
             <Route path="/login" component={SlideShow} />
             <Route path="/logout" component={SlideShow} />
+            <Route path="/notsignedin" component={NotSignedIn} />
             {/* <Route path="/dashboard"  isAuthenticated={isAuthenticated} />} /> */}
             { isAuthenticated
               ? (
                 <>
                   <Route path="/profile" render={(props) => <Profile {...props} user={user} />} />
-                  <Route path="/parkpal" render={(props) => <ParkPal {...props} user={user} />}/>
+                  <Route path="/parkpal" render={(props) => <ParkPal {...props} user={user} />} />
                   <Route path="/activity" component={Activities} />
                 </>
-              ) : <Redirect to="/" />}
+              ) : <Redirect to="/notsignedin" />}
             <Route path="*" component={NotFound} />
           </Switch>
           {/* <SlideShow /> */}
