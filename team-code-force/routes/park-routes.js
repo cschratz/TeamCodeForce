@@ -1,7 +1,7 @@
+/* eslint-disable no-console */
 const parkRouter = require('express').Router();
-const sequilize = require('../db/index');
 const { Park, UserParkWishList, UserParkHistory } = require('../db/index');
-const User = require('../db/models/User');
+// const User = require('../db/models/User');
 
 parkRouter.post('/wishlist', (req, res) => {
   const { name, userID } = req.body;
@@ -35,7 +35,7 @@ parkRouter.post('/wishlist', (req, res) => {
 //       {
 //         model: Park,
 //         where: {
-//           id_park: 
+//           id_park:
 //         }
 //       }
 //     ]
@@ -48,7 +48,7 @@ parkRouter.post('/wishlist', (req, res) => {
 //   const parkResult = [];
 //   UserParkWishList.findAll({
 //     where: { id_user: userID },
- 
+
 //   })
 // });
 // parkRouter.post('/wishlist/get', (req, res) => {
@@ -77,9 +77,7 @@ parkRouter.post('/wishlist', (req, res) => {
 //       // .catch(err => res.status(500).send('This is loop error: ', err));
 //       });
 //     })
-    
 //       console.log('park result at very bottom', parkResult);
-   
 //     // res.send(parkResult);
 //   // .catch(err => res.sendStatus(500));
 // });
@@ -99,7 +97,7 @@ parkRouter.post('/history', (req, res) => {
         id_park: park[0].id,
       },
     });
-  }).then((test) => {
+  }).then(() => {
     res.status(201).send({ message: 'Added to Database' });
   }).catch((err) => {
     console.log(err);

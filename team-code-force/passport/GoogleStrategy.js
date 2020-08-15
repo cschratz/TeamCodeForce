@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { google } = require('../.config.js');
@@ -20,13 +22,11 @@ passport.use(
     clientSecret: google.clientSecret,
   },
   (accessToken, refreshToken, profile, email, done) => {
-    console.log('Email: ', email);
     User.findOrCreate({
       where: { googleId: email.id },
       defaults: {
         name: email.displayName,
         googleId: email.id,
-        // eslint-disable-next-line no-underscore-dangle
         email: email._json.email,
         image: email._json.picture,
       },

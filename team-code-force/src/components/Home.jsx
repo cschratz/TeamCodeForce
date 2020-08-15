@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import {
