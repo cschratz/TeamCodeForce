@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import { google } from './.config';
+import MapStyling from './MapStyling';
 
 const Map = ({ parks, user }) => {
   const [myMarkers, setMarkers] = React.useState([]);
@@ -85,9 +86,10 @@ const Map = ({ parks, user }) => {
         </button>
       </div>
       <br />
-      <div style={{ height: '80vh', width: '100%' }}>
+      <div style={{ height: '60vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: google.MAPS_API_KEY }}
+          options={{styles: MapStyling}}
           center={center}
           zoom={5}
           yesIWantToUseGoogleMapApiInternals

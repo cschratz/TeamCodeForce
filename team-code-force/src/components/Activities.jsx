@@ -107,7 +107,7 @@ function Activities() {
       ) : (
         <div className="activities-search">
           <form>
-            <h5>Choose your favorite park activities:</h5>
+            <h3>Choose your favorite park activities:</h3>
             <select multiple={true} size={10} onChange={handleChange}>
               {parkActivities.map(({id, name}) => {
                 return (
@@ -120,27 +120,24 @@ function Activities() {
             <button className="button" type="button" onClick={handleSearchClick}>Search</button>
           </form>
           <hr />
-          <h5>Parks with your favorite activities:</h5>
-          <ul>
+          <h2>Parks with your favorite activity:</h2>
             {resultingParks.map(({id, name, parks}) => {
               return (
                 <div className="selected-activity" key={id}>
-                  <li>{name}</li>
+                  <h2>{name}</h2>
                   <br />
-                  <ul>
-                    {parks.map(({states, fullName, url}) => {
+                    {parks.map(({fullName, url}) => {
                       return (
                         <div className="activity-park" key={url}>
-                          <li><a href={url} target="_blank" rel="noopener noreferrer">{fullName} </a></li>
+                          <li><a href={url} target="_blank" rel="noopener noreferrer">{fullName}</a></li>
+                          <br />
                         </div>
                       )
                     })}
-                  </ul>
                   <br />
                 </div>
               )
             })}
-            </ul>
         </div>
       )}
     </div>

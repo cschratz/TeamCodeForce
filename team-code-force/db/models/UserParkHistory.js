@@ -14,14 +14,8 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
-    comment: {
+    name: {
       type: DataTypes.STRING,
-    },
-    rating: {
-      type: DataTypes.INTEGER,
-    },
-    favorite: {
-      type: DataTypes.BOOLEAN,
     },
   }, {
     freezeTableName: true,

@@ -1,6 +1,7 @@
 const parkRouter = require('express').Router();
 const sequilize = require('../db/index');
 const { Park, UserParkWishList, UserParkHistory } = require('../db/index');
+const { response } = require('express');
 
 
 parkRouter.post('/wishlist', (req, res) => {
@@ -16,6 +17,7 @@ parkRouter.post('/wishlist', (req, res) => {
       defaults: {
         id_user: userID,
         id_park: park[0].id,
+        name: park[0].name,
       }
     })
   }).then((entry) => {
@@ -28,25 +30,13 @@ parkRouter.post('/wishlist', (req, res) => {
 
 parkRouter.post('/wishlist/get', (req, res) => {
   const { userID } = req.body;
+
   UserParkWishList.findAll({
     where: { id_user: userID }
-  }).then(entry => {
-    const parkResult = ['heloo'];
-    entry.forEach(park => {
-      Park.findAll({
-        where: { id: park.id_park }
-      })
-      .then((parkName) => {
-        console.log('Park: ', park);
-        console.log('Parkname"', parkName);
-        //parkResult.push('parkName');
-        console.log(parkResult);
-      })
-      .catch(err => res.status(500).send('This is loop error: ', err));
-    })
-    res.send(parkResult);
   })
-    .catch(err => res.sendStatus(500));
+  .then(parkName => {
+    res.send(parkName);
+  })
 });
 
 parkRouter.post('/history', (req, res) => {
@@ -62,6 +52,7 @@ parkRouter.post('/history', (req, res) => {
       defaults: {
         id_user: userID,
         id_park: park[0].id,
+        name: park[0].name,
       }
     })
   }).then((test) => {
@@ -69,6 +60,17 @@ parkRouter.post('/history', (req, res) => {
   }).catch((err) => {
     console.log(err);
     res.sendStatus(500);
+  })
+});
+
+parkRouter.post('/history/get', (req, res) => {
+  const { userID } = req.body;
+
+  UserParkHistory.findAll({
+    where: { id_user: userID }
+  })
+  .then(parkName => {
+    res.send(parkName);
   })
 });
 

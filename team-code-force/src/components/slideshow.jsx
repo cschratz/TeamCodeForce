@@ -10,12 +10,14 @@ const SlideShow = () => {
   };
   return (
     <div>
+      <h1 id="logo">National Park Pal!</h1>
+      <h3>Search parks and activities to optimize your road trip experience!</h3>
       <Zoom {...zoomInProperties}>
         { slideShow.map((each, index) => (
           <div key={index}>
-            <h4>{each.name}</h4>
-            <p>{each.review}</p>
-            <img style={{ width: '65%', height: '50%' }} src={each.image} alt="park pic" />
+            <h2>{each.name}</h2>
+            <h4>{each.review}</h4>
+            <img style={{ width: '60%', height: '70%' }} src={each.image} alt="park pic" />
           </div>
         ))}
       </Zoom>

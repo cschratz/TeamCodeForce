@@ -52,8 +52,6 @@ const Home = () => {
 
   return (
     <div className="App">
-      <h1 id="logo">National Park Pal!</h1>
-      <h3>Search parks and activities to optimize your road trip experience!</h3>
       <Router>
         <main>
           <nav id="navbar">
@@ -81,7 +79,6 @@ const Home = () => {
               ) : <Redirect to="/" />}
             <Route path="*" component={NotFound} />
           </Switch>
-          {/* <SlideShow /> */}
         </main>
       </Router>
     </div>

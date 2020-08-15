@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 const InfoWindow = ({
   url, name, desc, image, user,
@@ -62,6 +61,7 @@ const InfoWindow = ({
         <br />
         <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
       </div>
+      <br />
       <button style={{marginRight: '20px'}} onClick={() => saveWishlist(user)}>Add To WishList</button>
       <button onClick={() => saveParkHistory(user)}>Seen It!</button>
     </div>
