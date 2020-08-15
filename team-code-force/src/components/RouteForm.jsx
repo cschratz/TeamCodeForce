@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 const RouteForm = ({ getpark }) => {
-  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -26,7 +28,7 @@ const RouteForm = ({ getpark }) => {
         <button
           type="submit"
           onClick={() => {
-            getpark(searchTerm);
+            getpark(searchTerm)
             setSearchTerm('');
           }}
         >

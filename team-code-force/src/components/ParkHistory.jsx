@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const ParkHistory = ({ userID }) => {
 
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(['Please Add Some Parks!']);
 
   useEffect(() => {
     async function getHistory(data) {
@@ -11,7 +11,7 @@ const ParkHistory = ({ userID }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userID: data })
       };
-      const response = await fetch('http://localhost:8080/park/history/get', requestOptions);
+      const response = await fetch(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/park/history/get`, requestOptions);
       response.json().then((data) => setHistory(data));
     };
     getHistory(userID);
@@ -19,7 +19,7 @@ const ParkHistory = ({ userID }) => {
 
   return (
   <div>
-    {history.map(park => <div key={park.id}>{park.name}</div>)}
+    {history.map(park => <h6 key={park.id}>{park.name}</h6>)}
   </div>
   )
 };

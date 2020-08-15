@@ -12,8 +12,6 @@ const Marker = ({
   const [isHovered, setIsHovered] = useState(false);
 
   const clickHandler = () => {
-    // window.open(`localhost:3000/parks/${props.searchName}`);
-    // window.open(url)
     setIsShown(!isShown);
     setIsHovered(false);
   };

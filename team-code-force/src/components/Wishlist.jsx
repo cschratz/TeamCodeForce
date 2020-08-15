@@ -11,7 +11,7 @@ const Wishlist = ({ userID }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userID: data })
       };
-      const response = await fetch('http://localhost:8080/park/wishlist/get', requestOptions);
+      const response = await fetch(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/park/wishlist/get`, requestOptions);
       response.json().then((data) => setWishList(data));
     };
     getWishList(userID);
@@ -19,7 +19,7 @@ const Wishlist = ({ userID }) => {
 
   return (
   <div>
-    {wishList.map(park => <div key={park.id}>{park.name}</div>)}
+    {wishList.map(park => <h6 key={park.id}>{park.name}</h6>)}
   </div>
   )
 };

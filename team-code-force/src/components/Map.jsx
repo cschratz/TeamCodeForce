@@ -86,7 +86,7 @@ const Map = ({ parks, user }) => {
         </button>
       </div>
       <br />
-      <div style={{ height: '60vh', width: '100%' }}>
+      <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: google.MAPS_API_KEY }}
           options={{styles: MapStyling}}

@@ -7,7 +7,7 @@ const InfoWindow = ({
     position: 'relative',
     bottom: 150,
     left: '-45px',
-    width: 220,
+    width: 400,
     backgroundColor: 'white',
     boxShadow: '0 2px 7px 1px rgba(0, 0, 0, 0.3)',
     padding: 20,
@@ -27,7 +27,7 @@ const InfoWindow = ({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, userID: data.id })
     };
-    fetch('http://localhost:8080/park/wishlist', requestOptions)
+    fetch(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/park/wishlist`, requestOptions)
       .then(response => response.json())
       .then(data => console.log(data));
   }
@@ -38,7 +38,7 @@ const InfoWindow = ({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, userID: data.id })
     };
-    fetch('http://localhost:8080/park/history', requestOptions)
+    fetch(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/park/history`, requestOptions)
       .then(response => response.json())
       .then(data => console.log(data));
   }

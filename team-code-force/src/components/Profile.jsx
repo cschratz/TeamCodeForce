@@ -19,14 +19,14 @@ const Profile = ({ user }) => {
       <img src={user.image} alt='profile' style={imageStyle}/>
       <br />
       <br />
-        <h3 style={{float: 'left', marginLeft: '100px'}}>
+        <h1 style={{float: 'left', marginLeft: '100px'}}>
           Park WishList
           <WishList userID={user.id} />
-        </h3>
-        <h3 style={{float: 'right', marginRight: '100px'}}>
+        </h1>
+        <h1 style={{float: 'right', marginRight: '100px'}}>
           Park History
           <ParkHistory userID={user.id} />
-        </h3>
+        </h1>
       </div>
     </div>
   );

@@ -4,15 +4,20 @@ import axios from 'axios';
 import SimpleMap from './Map';
 import RouteForm from './RouteForm';
 import { nps } from './.config';
+import Spinner from './spinner';
 
 function ParkPal({ user }) {
   const [parks, setParks] = useState([]);
+  const [loading, setLoading] = useState(null);
 
   useEffect(() => {
 
   }, [parks]);
 
   const getPark = (userState) => {
+    setLoading(true);
+    console.log(loading);
+
     let state = userState.toLowerCase();
     if (state === 'alabama') {
       state = 'al';
@@ -127,16 +132,21 @@ function ParkPal({ user }) {
             lat: parseFloat(park.latitude), lng: parseFloat(park.longitude), name: `${park.name} ${park.designation}`, description: park.description, url: park.url, searchName: park.name, image: park.images[0].url,
           }]));
         }
-      }));
+      }))
+      .then(() => {
+        setLoading(false);
+      })
   };
 
   return (
     <div className="ParkPal">
+      {loading && <Spinner />}
       <RouteForm getpark={getPark} />
       <SimpleMap parks={parks} user={user}/>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" alt="national parks" className="nps" />
     </div>
   );
 }
 
 export default ParkPal;
+
+{/* <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/US-NationalParkService-Logo.svg" alt="national parks" className="nps" /> */}
