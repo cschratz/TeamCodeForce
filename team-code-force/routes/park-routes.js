@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 const parkRouter = require('express').Router();
-const sequilize = require('../db/index');
 const { Park, UserParkWishList, UserParkHistory } = require('../db/index');
 const { response } = require('express');
 
@@ -10,7 +10,7 @@ parkRouter.post('/wishlist', (req, res) => {
     where: { name },
     defaults: {
       name,
-    }
+    },
   }).then((park) => {
     UserParkWishList.findOrCreate({
       where: { id_park: park[0].id },
@@ -25,7 +25,7 @@ parkRouter.post('/wishlist', (req, res) => {
   }).catch((err) => {
     console.log(err);
     res.sendStatus(500);
-  })
+  });
 });
 
 parkRouter.post('/wishlist/get', (req, res) => {
@@ -45,7 +45,7 @@ parkRouter.post('/history', (req, res) => {
     where: { name },
     defaults: {
       name,
-    }
+    },
   }).then((park) => {
     UserParkHistory.findOrCreate({
       where: { id_park: park[0].id },
@@ -60,7 +60,7 @@ parkRouter.post('/history', (req, res) => {
   }).catch((err) => {
     console.log(err);
     res.sendStatus(500);
-  })
+  });
 });
 
 parkRouter.post('/history/get', (req, res) => {
@@ -76,4 +76,4 @@ parkRouter.post('/history/get', (req, res) => {
 
 module.exports = {
   parkRouter,
-}
+};

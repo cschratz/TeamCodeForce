@@ -1,12 +1,16 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const UserModel = require('./models/User');
 const ParkModel = require('./models/Park');
 const UserParkHistoryModel = require('./models/UserParkHistory');
 const UserParkWishListModel = require('./models/UserParkWishList');
 
-const sequelize = new Sequelize('parksdb', 'root', '0924', {
+const { DB_HOST } = process.env || 'localhost';
+const { DB_NAME, DB_USER, DB_PASS } = process.env;
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   dialect: 'mysql',
-  host: 'localhost',
+  host: DB_HOST,
 });
 
 const User = UserModel(sequelize, Sequelize);
