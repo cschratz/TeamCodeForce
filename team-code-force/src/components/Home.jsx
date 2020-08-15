@@ -13,6 +13,7 @@ import ParkPal from './ParkPal';
 import Activities from './Activities';
 import NotSignedIn from './NotSignedIn';
 
+
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({});
@@ -21,7 +22,7 @@ const Home = () => {
   const { REACT_APP_SERVER_PORT } = process.env || 8080;
 
   useEffect(() => {
-    fetch(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/auth/login/success`, {
+    fetch(`http://${process.env.REACT_APP_VM_IP}:${process.env.REACT_APP_SERVER_PORT}/auth/login/success`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -47,10 +48,10 @@ const Home = () => {
 
   const logout = () => {
     console.log('logging out');
-    window.open(`http://localhost:${REACT_APP_SERVER_PORT}/auth/logout`, '_self');
+    window.open(`http://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/logout`, '_self');
   };
   const googleSignIn = () => {
-    window.open(`http://localhost:${REACT_APP_SERVER_PORT}/auth/google`, '_self');
+    window.open(`http://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/google`, '_self');
   };
 
   return (

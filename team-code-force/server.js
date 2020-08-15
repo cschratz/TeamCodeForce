@@ -16,9 +16,11 @@ const app = express();
 
 const { SERVER_PORT } = process.env || 8080;
 
+const { VM_IP } = process.env || 'localhost';
+
 app.set('trust proxy', 1);
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: `http://${VM_IP}:3000`,
   methods: 'GET, HEAD, PUT, PATCH, DELETE',
   credentials: true,
 }));
