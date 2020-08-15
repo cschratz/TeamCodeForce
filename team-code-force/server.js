@@ -9,7 +9,6 @@ require('./passport/GoogleStrategy');
 const { authRouter } = require('./routes/auth-routes');
 const { parkRouter } = require('./routes/park-routes');
 const { session } = require('./.config.js');
-require('./db/models/Park');
 require('./db/index.js');
 
 dotenv.config();

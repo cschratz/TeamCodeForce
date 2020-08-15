@@ -1,5 +1,8 @@
 const authRouter = require('express').Router();
 const passport = require('passport');
+require('dotenv').config();
+
+const { VM_IP } = process.env || 'localhost';
 
 authRouter.get('/login/success', (req, res) => {
   if (req.user) {
@@ -9,6 +12,8 @@ authRouter.get('/login/success', (req, res) => {
       user: req.user,
       cookies: req.cookies,
     });
+  } else {
+    res.status(500).send('Failed to authenticate');
   }
 });
 
@@ -21,7 +26,7 @@ authRouter.get('/login/failed', (req, res) => {
 
 authRouter.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('http://localhost:3000/login');
+  res.redirect(`http://localhost:3000/login`);
 });
 
 // auth route for google
