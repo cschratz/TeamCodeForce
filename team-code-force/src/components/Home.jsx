@@ -22,7 +22,7 @@ const Home = () => {
   const { REACT_APP_SERVER_PORT } = process.env || 8080;
 
   useEffect(() => {
-    fetch(`http://${process.env.REACT_APP_VM_IP}:${process.env.REACT_APP_SERVER_PORT}/auth/login/success`, {
+    fetch(`https://${process.env.REACT_APP_VM_IP}:${process.env.REACT_APP_SERVER_PORT}/auth/login/success`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -48,10 +48,10 @@ const Home = () => {
 
   const logout = () => {
     console.log('logging out');
-    window.open(`http://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/logout`, '_self');
+    window.open(`https://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/logout`, '_self');
   };
   const googleSignIn = () => {
-    window.open(`http://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/google`, '_self');
+    window.open(`https://${process.env.REACT_APP_VM_IP}:${REACT_APP_SERVER_PORT}/auth/google`, '_self');
   };
 
   return (

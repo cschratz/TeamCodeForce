@@ -20,7 +20,7 @@ const { VM_IP } = process.env || 'localhost';
 
 app.set('trust proxy', 1);
 app.use(cors({
-  origin: `http://${VM_IP}:3000`,
+  origin: `https://${VM_IP}:3000`,
   methods: 'GET, HEAD, PUT, PATCH, DELETE',
   credentials: true,
 }));

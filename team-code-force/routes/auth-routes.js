@@ -26,7 +26,7 @@ authRouter.get('/login/failed', (req, res) => {
 
 authRouter.get('/logout', (req, res) => {
   req.logout();
-  res.redirect(`http://${VM_IP}:3000/login`);
+  res.redirect(`https://${VM_IP}:3000/login`);
 });
 
 // auth route for google
@@ -36,8 +36,8 @@ authRouter.get('/google', passport.authenticate('google', {
 
 // callback route for google to redirect to
 authRouter.get('/google/redirect', passport.authenticate('google', {
-  successRedirect: `http://${VM_IP}:3000/`,
-  failureRedirect: `http://${VM_IP}:3000/login`,
+  successRedirect: `https://${VM_IP}:3000/`,
+  failureRedirect: `https://${VM_IP}:3000/login`,
 }));
 
 // auth check middleware
