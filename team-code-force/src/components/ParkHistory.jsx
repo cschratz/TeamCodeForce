@@ -11,7 +11,7 @@ const ParkHistory = ({ userID }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userID: data })
       };
-      const response = await fetch(`https://${process.env.REACT_APP_SERVER_IP}/park/history/get`, requestOptions);
+      const response = await fetch(`/park/history/get`, requestOptions);
       response.json().then((data) => setHistory(data));
     };
     getHistory(userID);

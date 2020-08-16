@@ -26,7 +26,7 @@ authRouter.get('/login/failed', (req, res) => {
 
 authRouter.get('/logout', (req, res) => {
   req.logout();
-  res.redirect(`https://${CLIENT}/login`);
+  res.redirect(`/`);
 });
 
 // auth route for google
@@ -36,8 +36,8 @@ authRouter.get('/google', passport.authenticate('google', {
 
 // callback route for google to redirect to
 authRouter.get('/google/redirect', passport.authenticate('google', {
-  successRedirect: `https://${CLIENT}/`,
-  failureRedirect: `https://${CLIENT}/login`,
+  successRedirect: `/`,
+  failureRedirect: `/login`,
 }));
 
 // auth check middleware

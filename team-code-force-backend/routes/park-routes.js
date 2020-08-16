@@ -74,6 +74,10 @@ parkRouter.post('/history/get', (req, res) => {
   })
 });
 
+parkRouter.get('/', (req, res) => {
+  res.send('Made it here');
+})
+
 module.exports = {
   parkRouter,
 };

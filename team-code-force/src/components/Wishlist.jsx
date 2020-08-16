@@ -11,7 +11,7 @@ const Wishlist = ({ userID }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userID: data })
       };
-      const response = await fetch(`https://${process.env.REACT_APP_SERVER_IP}/park/wishlist/get`, requestOptions);
+      const response = await fetch(`/park/wishlist/get`, requestOptions);
       response.json().then((data) => setWishList(data));
     };
     getWishList(userID);

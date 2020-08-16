@@ -1,7 +1,5 @@
-runtime: nodejs10
-env: standard
-
-service: backend
+runtime: nodejs
+env: flex
 
 beta_settings:
   cloud_sql_instances: root-melody-285714:us-central1:parkpal

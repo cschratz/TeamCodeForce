@@ -27,7 +27,7 @@ const InfoWindow = ({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, userID: data.id })
     };
-    fetch(`https://${process.env.REACT_APP_SERVER_IP}/park/wishlist`, requestOptions)
+    fetch(`/park/wishlist`, requestOptions)
       .then(response => response.json())
       .then(data => console.log(data));
   }
@@ -38,7 +38,7 @@ const InfoWindow = ({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, userID: data.id })
     };
-    fetch(`https://${process.env.REACT_APP_SERVER_IP}/park/history`, requestOptions)
+    fetch(`/park/history`, requestOptions)
       .then(response => response.json())
       .then(data => console.log(data));
   }
